@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="模态框效果"/>
+  <style>
+    body {
+  background-color: rgba(0,0,0,0.4)
+}
+.layout {
+  width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+.box {
+  width: 100%;
+  position: absolute;
+  top: 197px;
+  background: #fff;
+  box-shadow:  0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.box header,.box footer{
+  padding: 1px 18px;
+  background-color: #009688;
+  color: #fff;
+}
+.box article{
+  padding: 1px 18px;
+}
+.close {
+  float: right;
+  font-size: 18px;
+  line-height: 60px;
+  cursor: pointer;
+}
+
+  </style>
+  
+  <title>绝对定位</title>
+</head>
+<body>
+ <div class="layout">
+   <div class="content">
+     <h1>这是页面内容</h1>
+     <h1>这是页面内容</h1>
+     <h1>这是页面内容</h1>
+     <h1>这是页面内容</h1>
+   </div>
+   <div class="box">
+    <header>
+      <span class="close">×</span>
+      <h3>头部</h3>
+    </header>
+    <article>
+      <p>这是内容</p>
+      <p>这是内容</p>
+    </article>
+    <footer>
+     <p>尾部</p>
+    </footer>
+   </div>
+ </div>
+</body>
+</html>

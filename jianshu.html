@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="实现简书效果"/>
+  <style>
+    *{
+  margin: 0;
+  padding: 0;
+}
+.layout {
+  max-width: 800px;
+  margin: 10px auto;
+  padding: 10px;
+  border-top: 2px solid #ccc;  
+  border-bottom: 2px solid #ccc;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+}
+.topbar #avater {
+  width: 80px;
+  height: 80px;
+  border: 1px solid #ddd;
+  border-radius: 40px;
+  background-image: url("http://i1.buimg.com/599859/4a29b0841c2db646.jpg");
+  background-size: 80px 80px;
+}
+.topbar>p {
+  margin-left: 10px;
+}
+.topbar>span {
+  margin-left: 10px;
+  color: #ccc;
+}
+main {
+  width: 600px;
+  /*height: 94px;*/
+  margin: 5px;
+}
+main>.title {
+   font-size:22px;
+   font-weight: bold;
+}
+main>p {
+  /**多行文本省略…**/
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+ /* overflow: hidden;
+  text-overflow: ellipsis;*/
+}
+main>span {
+  color: #f2907f ;
+  border: 2px solid #f2907f;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 8px;
+  padding: 1px 8px;
+}
+.content {
+  display: flex;
+  align-items: center;
+}
+.content #illustration {
+  width: 180px;
+  height: 160px;
+  border-radius: 8px;
+  background-image: url("http://upload-images.jianshu.io/upload_images/6426975-775fa844074fe8be.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240");
+   background-size: 100%;
+}
+a:link {
+  text-decoration: none;
+  color: #000;
+}
+a:visited {
+  color: #bbb;
+}
+a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+  </style>
+  <title>JS Bin</title>
+</head>
+<body>
+  <div class="layout">
+    
+    <div class="content">
+      <div class="abstract">
+       <div class="topbar">
+        <div id="avater"></div>
+        <p>洋气杂货店</p>
+        <span>昨天 12:56</span>
+       </div>
+       <main>
+        <a class="title" href="#">选择比努力更能拉开人与人之间的差距</a>
+        <p>文/洋气杂货店01.晚上五点半下班，我和同事一起坐地铁赶去看关于职业生涯规划的免费讲座，做讲座的这个人是同事的校友，学姐，已经毕业八年了，一起来听的还有这个同事的几位大学同学，他们都毕业于这所位于上海的优秀大学。
+七八点钟，小地方的人大概都吃完晚饭看剧聊天休息了吧，如果按照我在家的习惯，这个时候我应该洗完澡躺在床上刷微博或者看剧了，即使我想出来参加一些有意义的事，外面也只是漆黑一片，一无所有。</p>
+         <span>思考</span>  
+       </main>
+      </div>
+      <div id="illustration"></div> 
+    </div>
+ 
+  </div>
+</body>
+</html>

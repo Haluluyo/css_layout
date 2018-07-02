@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="description" content="QQ-music懒加载模块"/>
+  <meta charset="utf-8">
+  <style>
+  *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+ }
+ body{
+   margin: 0 auto;
+   width: 1300px;
+ }
+ ul,li{
+     list-style: none;
+ }
+ a{
+   text-decoration: none;
+   color: #333;
+ }
+a:hover {
+  color: #31c27c;
+  cursor: pointer; 
+}
+.songsList-view{
+   width: 100%;
+   background: url(https://y.gtimg.cn/mediastyle/yqq/img/bg_detail.jpg) 50% 0 repeat-x;
+   font-size: 14px;
+}
+.songsList-view #menu{
+  //border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+  padding: 60px 30px 32px 30px;
+}
+.songsList-view #menu .type{
+  //border: 1px solid orange;
+  padding: 0 25px;
+  border-left: 1px solid #eeeef0;
+}
+.songsList-view #menu .type:first-child{
+  border-left: 0;
+}
+.songsList-view #menu h4{
+  margin-bottom: 10px;
+  color: #999;
+  cursor: default; 
+}
+.songsList-view #menu .type-list{
+  //border: 1px solid orange;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-width: 120px;
+}
+.songsList-view #menu .type-list li{
+  //border: 1px solid pink;
+  width: 60px;
+  margin: 5px 0;;
+}
+.songsList-view #menu .type-list li span{
+  display: inline-block;
+  margin-left: 4px;
+  margin-bottom: 2px;
+  padding: 3px;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+  transform: rotate(45deg);
+  color: #333;
+}
+ #menu .type-list li:hover span{
+   color: #31c27c;
+}
+
+.songlist{
+  //border: 1px solid blue;
+  width: 100%;
+  padding: 0 30px 32px 30px;
+}
+.songlist h2{
+  margin: 10px 0;
+  font-weight: normal;
+  letter-spacing: 3px;
+} 
+
+.songlist .lazyload-list{
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.songlist .lazyload-list a{
+  display: block;
+}
+.songlist .lazyload-list li{
+  //border: 1px solid purple;
+  display: inline-block;
+  margin: 10px 25px 30px 0;
+  
+}
+.songlist .lazyload-list .cover{
+  //border: 1px solid #fff;
+  width: 220px;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+}
+.songlist .lazyload-list .cover img{
+  width: 100%;
+  height: 100%;
+}
+.songlist .lazyload-list .cover:hover img{
+  transform: scale(1.07) translateZ(0);
+  transition: transform .75s cubic-bezier(0,1,.75,1);
+}
+.songlist .lazyload-list .cover .cover-img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 70px;
+  height: 70px;
+  background: url("https://y.gtimg.cn/mediastyle/yqq/img/cover_play.png?max_age=2592000&v=88abebcbc1242dbbbbc836cc3e04a006");
+  opacity: 0;
+  //border: 1px solid #000;
+}
+.songlist .lazyload-list .cover:hover .cover-img{
+  opacity: 1;
+}
+
+.songlist .lazyload-list .singer-info{
+  margin-top: 15px;
+}
+.songlist .lazyload-list .singer-name,p{
+  color: #999;
+}
+.songlist .lazyload-list .singer-name:hover{
+  color: #31c27c;
+}
+
+  </style>
+  <title>QQ音乐歌单</title>
+</head>
+<body>
+  <div class="navtab-ct songsList-view hide">
+    <div id="menu">
+      <div class="type">
+        <h4>语种</h4>
+        <ul class="type-list">
+          <li><a href="#">国语</a></li>
+          <li><a href="#">英语</a></li>
+          <li><a href="#">韩语</a></li>
+          <li><a href="#">粤语</a></li>
+          <li><a href="#">日语</a></li>
+          <li><a href="#">更多<span></span></a></li>
+        </ul>
+      </div>
+      <div class="type">
+        <h4>流派</h4>
+        <ul class="type-list">
+          <li><a href="#">流行</a></li>
+          <li><a href="#">轻音乐</a></li>
+          <li><a href="#">摇滚</a></li>
+          <li><a href="#">民谣</a></li>
+          <li><a href="#">R&amp;B</a></li>
+          <li><a href="#">嘻哈</a></li>
+          <li><a href="#">电子</a></li>
+          <li><a href="#">古典</a></li>
+          <li><a href="#">更多<span></span></a></li>
+        </ul>
+      </div>
+      <div class="type">
+        <h4>主题</h4>
+        <ul class="type-list">
+          <li><a href="#">ACG</a></li>
+          <li><a href="#">经典</a></li>
+          <li><a href="#">网络歌曲</a></li>
+          <li><a href="#">影视</a></li>
+          <li><a href="#">KTV热歌</a></li>
+          <li><a href="#">儿歌</a></li>
+          <li><a href="#">中国风</a></li>
+          <li><a href="#">古风</a></li>
+          <li><a href="#">更多<span></span></a></li>
+        </ul>
+      </div>
+      <div class="type">
+        <h4>心情</h4>
+        <ul class="type-list">
+          <li><a href="#">伤感</a></li>
+          <li><a href="#">安静</a></li>
+          <li><a href="#">快乐</a></li>
+          <li><a href="#">治愈</a></li>
+          <li><a href="#">励志</a></li>
+          <li><a href="#">甜蜜</a></li>
+          <li><a href="#">寂寞</a></li>
+          <li><a href="#">宣泄</a></li>
+          <li><a href="#">思念</a></li>
+        </ul>
+      </div>
+      <div class="type">
+        <h4>场景</h4>
+        <ul class="type-list">
+          <li><a href="#">睡前</a></li>
+          <li><a href="#">夜店</a></li>
+          <li><a href="#">学习</a></li>
+          <li><a href="#">运动</a></li>
+          <li><a href="#">开车</a></li>
+          <li><a href="#">约会</a></li>
+          <li><a href="#">工作</a></li>
+          <li><a href="#">旅行</a></li>
+          <li><a href="#">更多<span></span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="songlist">
+      <h2>全部歌单</h2>
+      <div class="lazyload-wrap">
+        <ul class="lazyload-list">
+          <li>
+            <a class="cover" href="https://y.qq.com/n/yqq/playsquare/3834933826.html#stat=y_new.playlist.dissname" target="_blank">
+              <img src="https://p.qpic.cn/music_cover/Q6jzKPNCPTc2iczypkicqzaAM9ZP2NxlvicLZ8LBYXFPByps3qK9oLRYw/300?n=1" alt="">
+              <div class="cover-img"></div>
+            </a>
+            <div class="singer-info">
+              <a href="https://y.qq.com/n/yqq/playsquare/3834933826.html#stat=y_new.playlist.dissname" target="_blank">Big Room：自驾游听的提神电音</a>
+              <a class="singer-name" href="#">杰少</a>
+              <p>播放量： 102万</p>
+            </div>
+          </li>
+          
+          <li>
+            <a class="cover" href="https://y.qq.com/n/yqq/playsquare/4044329625.html#stat=y_new.playlist.pic_click" target="_blank">
+              <img src="https://p.qpic.cn/music_cover/aaxX4Babic4VicBPicJOwr5xj56sLsov2k1XYnhRDUQxZBvgh19jvibWhg/300?n=1" alt="">
+              <div class="cover-img"></div>
+            </a>
+            <div class="singer-info">
+              <a href="https://y.qq.com/n/yqq/playsquare/4044329625.html#stat=y_new.playlist.pic_click" target="_blank">致郁嗓：夜幕下呆坐的失恋忏悔者</a>
+              <a class="singer-name" href="#">默笙</a>
+              <p>播放量： 32.6万</p>
+            </div>
+          </li>
+          <li>
+            <a class="cover" href="https://y.qq.com/n/yqq/playsquare/4095340486.html#stat=y_new.playlist.pic_click" target="_blank">
+              <img src="https://p.qpic.cn/music_cover/UCJDptU3vGgQt6PS5Hn6CicNhqz0nBqOib82TMZ1AeVJHjOvvRB3iaW3Q/300?n=1" alt="">
+              <div class="cover-img"></div>
+            </a>
+            <div class="singer-info">
+              <a href="https://y.qq.com/n/yqq/playsquare/4095340486.html#stat=y_new.playlist.pic_click" target="_blank">适合散步听的韩国新世纪</a>
+              <a class="singer-name" href="#">生如夏花</a>
+              <p>播放量： 29.8万</p>
+            </div>
+          </li>
+          <li>
+            <a class="cover" href="https://y.qq.com/n/yqq/playsquare/4116018001.html#stat=y_new.playlist.pic_click" target="_blank">
+              <img src="https://p.qpic.cn/music_cover/UK1BOj3IRzsiak2mfOIZReHp7AtOsq0VxDNnAwgdMES7Q763ok2tC1g/300?n=1" alt="">
+              <div class="cover-img"></div>
+            </a>
+            <div class="singer-info">
+              <a href="https://y.qq.com/n/yqq/playsquare/4116018001.html#stat=y_new.playlist.pic_click" target="_blank">减压放松 · 流行钢琴集</a>
+              <a class="singer-name" href="#">爱唱歌的小小风</a>
+              <p>播放量： 52.2万</p>
+            </div>
+          </li>
+          <li>
+            <a class="cover" href="https://y.qq.com/n/yqq/playsquare/3838261626.html#stat=y_new.playlist.pic_click" target="_blank">
+              <img src="https://p.qpic.cn/music_cover/yyDR0yDpzJMiauiaIribblrE2QHHzrn4d47f7zZfU8OB7ZtAZpU7toiaCg/300?n=1" alt="">
+              <div class="cover-img"></div>
+            </a>
+            <div class="singer-info">
+              <a href="https://y.qq.com/n/yqq/playsquare/3838261626.html#stat=y_new.playlist.pic_click" target="_blank">烟花下的绚丽 | 昭和&平成爵士</a>
+              <a class="singer-name" href="#">二哈喇雪迪苗</a>
+              <p>播放量： 11.9万</p>
+            </div>
+          </li>
+          <li>
+            <a class="cover" href="https://y.qq.com/n/yqq/playsquare/4095275870.html#stat=y_new.playlist.pic_click" target="_blank">
+              <img src="https://p.qpic.cn/music_cover/Q6KVAc13Tib5Rw8uvMhqoHau7KdRZTVficPwVTl5nDrBhXqH8A7BbHjw/300?n=1" alt="">
+              <div class="cover-img"></div>
+            </a>
+            <div class="singer-info">
+              <a href="https://y.qq.com/n/yqq/playsquare/4095275870.html#stat=y_new.playlist.pic_click" target="_blank">历届格莱美最佳摇滚歌曲</a>
+              <a class="singer-name" href="#">李笑.笑.哭不得@99吧</a>
+              <p>播放量： 6.1万</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+  </div> 
+</body>
+</html>
